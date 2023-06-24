@@ -114,33 +114,22 @@ def justWorkload():
 
 
     time, produce_rate, lag, consume_rate, servers = [], [], [], [], []
-    # time.append(0),
-    # produce_rate.append(0)
-    # lag.append(0)
-    # consume_rate.append(0)
-    # servers.append(3)
 
-    number_of_servers = 4
-    max_rate_of_server = 5000
+
+
     frecuency = 0.05
     time_period = 200
-    offset = 10000
-    amplitude = 5000
-    rescale_time = 5
-    pause = 0
-    rescale_threshold = 10000
-    rescale_cooldown = 30
-    random_amplitude = 10000
+    offset = 200
+    amplitude = 100
+    random_amplitude = 50
 
-    cooldown = 0
 
-    lag_one_timestep = 0
 
     for t in range(time_period):
         time.append(t)
 
-        produce_one_timestep = offset + amplitude * math.cos(frecuency * t) + random_amplitude * (
-            random.uniform(-0.1, 0.1))
+        produce_one_timestep = offset + amplitude * math.cos(frecuency * t)
+                              # + random_amplitude * ( random.uniform(-0.1, 0.1))
         produce_rate.append(produce_one_timestep)
 
     fig, axs = plt.subplots(2)
@@ -164,10 +153,10 @@ def justWorkload():
 
     fig.tight_layout()
 
-    plt.show()# Press Ctrl+F8 to toggle the breakpoint.
+    plt.show()
 
 
 
 if __name__ == '__main__':
     simulate()
-    justWorkload()
+    #justWorkload()
