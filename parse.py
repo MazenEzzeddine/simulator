@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Dict
 
 import pandas as pd
@@ -78,9 +79,69 @@ def getReplicas():
     print(u)
     print(u[1])
 
+    h = data[' pod_name'].where(data[' pod_name'] == u[1]).last_valid_index()
+    m = data[' pod_name'].where(data[' pod_name'] == u[1]).first_valid_index()
+
+
+
+    datem = data['timestamp'].values[m]
+    dateh = data['timestamp'].values[h]
+    print(datem)
+    print(dateh)
+    print(str(datem)[0:-4])
+
+    datetime_obj1 = datetime.strptime(
+        str(datem)[0:-11], '%Y-%m-%dT%H:%M:%S')
+    print(datetime_obj1)
+
+    datetime_obj2 = datetime.strptime(
+        str(dateh)[0:-11], '%Y-%m-%dT%H:%M:%S')
+    print(datetime_obj1)
+    t = datetime_obj1 - datetime_obj2
+
+    print(t.seconds/60 )
+
+
+
+    print(h)
+    print(m)
     print(c)
 
+def getReplicasMinutes():
+    data = pd.read_csv('mazparse.txt')
+    c = data[' pod_name'].nunique()
+    u = data[' pod_name'].unique()
+    totalseconds =0
 
+    for i in range(len(u)) :
+     print(u[i])
+     h = data[' pod_name'].where(data[' pod_name'] == u[i]).last_valid_index()
+     m = data[' pod_name'].where(data[' pod_name'] == u[i]).first_valid_index()
+
+     datem = data['timestamp'].values[m]
+     dateh = data['timestamp'].values[h]
+     print(datem)
+     print(dateh)
+
+
+     datetime_obj1 = datetime.strptime(
+         str(datem)[0:-11], '%Y-%m-%dT%H:%M:%S')
+
+     datetime_obj2 = datetime.strptime(
+        str(dateh)[0:-11], '%Y-%m-%dT%H:%M:%S')
+
+     t = (datetime_obj1 - datetime_obj2).seconds
+
+     totalseconds += t
+    print(totalseconds/60)
+
+    # print(t.seconds/60 )
+
+
+
+    # print(h)
+    # print(m)
+    # print(c)
 
 
 
@@ -88,4 +149,5 @@ def getReplicas():
 if __name__=='__main__':
 
     #readPanda()
-    getReplicas()
+    #getReplicas()
+    getReplicasMinutes()
