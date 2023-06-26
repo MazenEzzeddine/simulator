@@ -70,12 +70,22 @@ def readPanda():
     # print(grouped.keys)
    # print(data)
 
+def getReplicas():
+    data = pd.read_csv('mazparse.txt')
+    c = data[' pod_name'].nunique()
+    u = data[' pod_name'].unique()
+    print(type(u))
+    print(u)
+    print(u[1])
+
+    print(c)
+
 
 
 
 
 
 if __name__=='__main__':
-    # parse()
-    # parseLatency()
-    readPanda()
+
+    #readPanda()
+    getReplicas()
