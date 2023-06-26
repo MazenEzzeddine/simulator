@@ -1,5 +1,8 @@
 from typing import Dict
 
+import pandas as pd
+import matplotlib.pyplot as plt
+
 
 def parse():
     with open('mazparse.txt', 'r') as f:
@@ -42,9 +45,37 @@ def parseLatency():
         # print(key, map[key])
         # print('=========================')
 
+def readPanda():
+    data = pd.read_csv('mazparse.txt')
+    # grouped = data.groupby(axis=1)
+    # print(grouped)
+    print(data[' text_payload'])
+    print(data[' pod_name'])
+    data[' text_payload'] = data[' text_payload'].str.extract('latency is (\d+)')
+
+    data[' text_payload'] = data[' text_payload'].astype(float)
+    # s = pd.to_numeric(data[' text_payload'])
+    # print(s.head)
+
+    your_counter = len(data[' text_payload'][data[' text_payload'] > 500])
+    print(your_counter)
+
+    #data[' text_payload'].hist(bins=100)
+    data[' text_payload'].hist(cumulative=True, bins=200, density =1)##hist(bins=100)
+    #plt.plot( data[' text_payload'])
+    plt.show()
+
+
+    # grouped = data.groupby(' pod_name')
+    # print(grouped.keys)
+   # print(data)
+
+
+
 
 
 
 if __name__=='__main__':
-    parse()
-    parseLatency()
+    # parse()
+    # parseLatency()
+    readPanda()
