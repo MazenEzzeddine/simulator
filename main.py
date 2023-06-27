@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import math
 import random
 
+import numpy
+
 
 def simulate():
     # Use a breakpoint in the code line below to debug your script.
@@ -16,7 +18,7 @@ def simulate():
     number_of_servers = 4
     max_rate_of_server = 5000
     frecuency = 0.05
-    time_period = 1000
+    time_period = 600 #1000
     offset = 10000
     amplitude = 5000
     rescale_time = 5
@@ -118,18 +120,17 @@ def justWorkload():
 
 
     frecuency = 0.05
-    time_period = 200
-    offset = 200
-    amplitude = 100
+    time_period = 250
+    offset = 0
+    amplitude = 1 #100
     random_amplitude = 50
 
 
 
     for t in range(time_period):
         time.append(t)
-
-        produce_one_timestep = offset + amplitude * math.cos(frecuency * t)
-                              # + random_amplitude * ( random.uniform(-0.1, 0.1))
+                       ## 0.05 = 2pi f => f=
+        produce_one_timestep = offset + amplitude * math.sin(frecuency * t)#* #+ random_amplitude * ( random.uniform(-0.1, 0.1))
         produce_rate.append(produce_one_timestep)
 
     fig, axs = plt.subplots(2)

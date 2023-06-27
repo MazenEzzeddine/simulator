@@ -47,7 +47,7 @@ def parseLatency():
         # print('=========================')
 
 def readPanda():
-    data = pd.read_csv('mazparse.txt')
+    data = pd.read_csv('linear.txt')
     # grouped = data.groupby(axis=1)
     # print(grouped)
     print(data[' text_payload'])
@@ -108,7 +108,9 @@ def getReplicas():
     print(c)
 
 def getReplicasMinutes():
-    data = pd.read_csv('mazparse.txt')
+    #data = pd.read_csv('mazparse.txt')
+    data = pd.read_csv('96.txt')
+
     c = data[' pod_name'].nunique()
     u = data[' pod_name'].unique()
     totalseconds =0
@@ -148,6 +150,6 @@ def getReplicasMinutes():
 
 if __name__=='__main__':
 
-    #readPanda()
+    readPanda()
     #getReplicas()
-    getReplicasMinutes()
+    #getReplicasMinutes()
