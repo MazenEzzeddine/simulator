@@ -7,7 +7,7 @@ from matplotlib import dates
 
 
 def readPanda():
-    data = pd.read_csv('17.txt')
+    data = pd.read_csv('graph/latency3.txt')
     data = data.iloc[::-1].reset_index()
     # grouped = data.groupby(axis=1)
     # print(grouped)
@@ -22,17 +22,17 @@ def readPanda():
 
     fig, ax = plt.subplots()
 
-    ax.xaxis.set_major_formatter(dates.DateFormatter('%H:%M'))
+    # ax.xaxis.set_major_formatter(dates.DateFormatter('%H:%M'))
+    #
+    # plt.xticks(rotation=45, ha='right')
 
-    plt.xticks(rotation=45, ha='right')
 
-
-    your_counter = len(data[' text_payload'][data[' text_payload'] > 500])
+    your_counter = len(data[' text_payload'][data[' text_payload'] > 1500])
     print(your_counter)
 
     #data[' text_payload'].hist(bins=100)
-    #data[' text_payload'].hist(cumulative=True, bins=200, density =1)##hist(bins=100)
-    ax.plot(data['timestamp'], data[' text_payload'])
+    data[' text_payload'].hist(cumulative=True, bins=200, density =1)##hist(bins=100)
+    #ax.plot(data['timestamp'], data[' text_payload'])
     plt.show()
 
 
@@ -44,7 +44,7 @@ def readPanda():
 
 def getReplicasMinutes():
     #data = pd.read_csv('mazparse.txt')
-    data = pd.read_csv('17.txt')
+    data = pd.read_csv('graph/latency3.txt')
 
     u = data[' pod_name'].unique()
     print(u)
